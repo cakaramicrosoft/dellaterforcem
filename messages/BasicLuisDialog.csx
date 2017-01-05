@@ -13,7 +13,8 @@ public class BasicLuisDialog : LuisDialog<object>
     public BasicLuisDialog() : base(new LuisService(new LuisModelAttribute(Utils.GetAppSetting("LuisAppId"), Utils.GetAppSetting("LuisAPIKey"))))
     {
     }
-
+    
+    public List<String> conversation_history = new List<String>();
     [LuisIntent("None")]
     public async Task NoneIntent(IDialogContext context, LuisResult result)
     {
@@ -27,12 +28,21 @@ public class BasicLuisDialog : LuisDialog<object>
     public async Task MyIntent(IDialogContext context, LuisResult result)
     {
         await context.PostAsync($"You have reached the MyIntent intent. You said: {result.Query}"); //
+        conversation_history.Add("myIntent");
         context.Wait(MessageReceived);
     }
     [LuisIntent("YarroIntent")]
     public async Task YarroIdsfsdftent(IDialogContext context, LuisResult result)
     {
-        await context.PostAsync($"Sensin lan YARRO!"); //
+        
+        if (conversation_history.IndexOf("YARRO"))
+        {
+            await context.PostAsync($"Yine mi geldin lan YARRO!");
+        } else
+        {
+            await context.PostAsync($"Sensin lan YARRO!"); //
+            conversation_history.Add("YARRO");
+        }
         context.Wait(MessageReceived);
     }
 }
