@@ -17,7 +17,7 @@ public class BasicLuisDialog : LuisDialog<object>
     [LuisIntent("None")]
     public async Task NoneIntent(IDialogContext context, LuisResult result)
     {
-        await context.PostAsync($"la la la Ne diyon lan . You said: {result.Query}"); //
+        await context.PostAsync($"cvcb la la la Ne diyon lan . You said: {result.Query}"); //
         context.Wait(MessageReceived);
     }
 
