@@ -35,7 +35,7 @@ public class BasicLuisDialog : LuisDialog<object>
     public async Task YarroIdsfsdftent(IDialogContext context, LuisResult result)
     {
         
-        if (conversation_history.IndexOf("YARRO")>0)
+        if (conversation_history.exists("YARRO"))
         {
             await context.PostAsync($"Yine mi geldin lan YARRO!");
         } else
