@@ -15,6 +15,7 @@ public class BasicLuisDialog : LuisDialog<object>
     }
     
     public List<String> conversation_history = new List<String>();
+    protected int yarroGeldi = 0;
     [LuisIntent("None")]
     public async Task NoneIntent(IDialogContext context, LuisResult result)
     {
@@ -29,19 +30,21 @@ public class BasicLuisDialog : LuisDialog<object>
     {
         await context.PostAsync($"You have reached the MyIntent intent. You said: {result.Query}"); //
         conversation_history.Add("myIntent");
+        
         context.Wait(MessageReceived);
     }
     [LuisIntent("YarroIntent")]
     public async Task YarroIdsfsdftent(IDialogContext context, LuisResult result)
     {
         
-        if (conversation_history.Exists("YARRO"))
+        if (this.yarroGeldi>0)
         {
             await context.PostAsync($"Yine mi geldin lan YARRO!");
         } else
         {
             await context.PostAsync($"Sensin lan YARRO!"); //
             conversation_history.Add("YARRO");
+            yarroGeldi += 1;
         }
         context.Wait(MessageReceived);
     }
