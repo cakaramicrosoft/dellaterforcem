@@ -29,4 +29,10 @@ public class BasicLuisDialog : LuisDialog<object>
         await context.PostAsync($"You have reached the MyIntent intent. You said: {result.Query}"); //
         context.Wait(MessageReceived);
     }
+    [LuisIntent("YarroIntent")]
+    public async Task YarroIdsfsdftent(IDialogContext context, LuisResult result)
+    {
+        await context.PostAsync($"Sensin lan YARRO!"); //
+        context.Wait(MessageReceived);
+    }
 }
